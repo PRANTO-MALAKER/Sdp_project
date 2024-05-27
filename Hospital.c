@@ -421,4 +421,366 @@ void emp()
                                             iF=1;
                                             printf("\n\t\tTHIS UID ALREADY EXISTS. ENTER ANOTHER ONE");
                                             goto u;
+                                        }
+                                }
+                            if(iF==0||fread(&s,recsize1,1,fs)==0)
+                                {
+                                    fseek (fs,0,SEEK_END);
+                                    strcpy(s.uid,id);
+                                    fflush(stdin);
+                                    printf("\nEnter the name of the Employee: ");
+                                    gets(s.name);
+                                    printf("\nEnter the name of the Guardian: ");
+                                    gets(s.fname);
+                                    printf("\nEnter the gender of the patient(M.male or F.female): ");
+                                    scanf("%c",&s.gender);
+                                    printf("\nEnter the Blood group of the Employee: ");
+                                    scanf("%s",s.bg);
+                                    printf("\nEnter the age of the Employee: ");
+                                    scanf("%d",&s.age);
+                                    printf("\nEnter the Salary of the Employee: ");
+                                    scanf("%lf",&s.salary);
+                                    printf("\nEnter the address of the Employee:\n");
+                                    printf("\n\tEnter the house number: ");
+                                    scanf("%d",&s.b.hno);
+                                    fflush(stdin);
+                                    printf("\n\tEnter the street/colony: ");
+                                    scanf("%s",s.b.street);
+                                    printf("\n\tEnter the city: ");
+                                    scanf("%s",s.b.city);
+                                    printf("\n\tEnter the state: ");
+                                    scanf("%s",s.b.state);
+                                    printf("\nEnter the phone number of the Employee: ");
+                                    scanf("%s",s.ph);
+                                    fflush(stdin);
+                                    printf("\nEnter the Designation: ");
+                                    gets(s.desig);
+                                    fwrite(&s,recsize1,1,fs);
+                                    printf("\n----------------------------------------------------");
+                                    printf("\nWant to add entry of the another Employee(Y/N): ");
+                                    fflush(stdin);
+                                    more=getche();
+                                }
+                            }
+                        break;
+                    case '2':
+                        clrscr();
+                        more='Y';
+                        while(more=='Y'||more=='y')
+                            {
+                                printf("\nEnter the UID of the patient to modify: ");
+                                scanf("%s",id);
+                                rewind(fs);
+                                while(fread(&s,recsize1,1,fs)==1)
+                                    {
+                                        if(strcmp(s.uid,id)==0)
+                                            {
+                                                fflush(stdin);
+                                                printf("\nEnter the new name of the Employee: ");
+                                                gets(s.name);
+                                                printf("\nEnter the new name of the Guardian: ");
+                                                gets(s.fname);
+                                                printf("\nEnter the new Blood group of the Employee: ");
+                                                scanf("%s",s.bg);
+                                                printf("\nEnter the new age of the Employee: ");
+                                                scanf("%d",&s.age);
+                                                printf("\nEnter the new Salary of the Employee: ");
+                                                scanf("%lf",&s.salary);
+                                                printf("\nEnter the new address of the Employee:\n");
+                                                printf("\n\tEnter the house number: ");
+                                                scanf("%d",&s.b.hno);
+                                                fflush(stdin);
+                                                printf("\n\tEnter the street/colony: ");
+                                                scanf("%s",s.b.street);
+                                                printf("\n\tEnter the city: ");
+                                                scanf("%s",s.b.city);
+                                                printf("\n\tEnter the state: ");
+                                                scanf("%s",s.b.state);
+                                                printf("\nEnter the new phone number of the Employee: ");
+                                                scanf("%s",s.ph);
+                                                fseek(fs,-recsize1,SEEK_CUR);
+                                                fwrite(&s,recsize1,1,fs);
+                                                break;
+                                            }
+                                        }
+                                    printf("\n----------------------------------------------------");
+                                    printf("\nModify another Record(Y/N): ");
+                                    fflush(stdin);
+                                    more=getche();
+                                }
+                            break;//check
+                        case '3':
+                            clrscr();
+                            more='Y';
+                            while(more=='Y'||more=='y')
+                                {
+                                    printf("\nEnter name to search: ");
+                                    gets(s_name);
+                                    rewind(fs);
+                                    while(fread(&s,recsize1,1,fs)==1)
+                                        {
+                                            if(strcmp(s.name,s_name)==0)
+                                                {
+                                                    printf("\nUID of the Employee : ");
+                                                    puts(s.uid);
+                                                    printf("\nName of the Employee : ");
+                                                    puts(s.name);
+                                                    printf("\nName of the Guardian : ");
+                                                    puts(s.fname);
+                                                    printf("\nAge : %d",s.age);
+                                                    printf("\nSalary: %lf",s.salary);
+                                                    printf("\nGender : %c",s.gender);
+                                                    printf("\nBlood group: %s",s.bg);
+                                                    printf("\nAddress  : %d,%s,%s,%s",s.b.hno,s.b.street,s.b.city,s.b.state);
+                                                    printf("\nphone number : +91-%s",s.ph);
+                                                    printf("\nDesignation : %s",s.desig);
+                                                }
+                                        }
+                                    printf("\n----------------------------------------------------");
+                                    printf("\nSearch another Entry(Y/N): ");
+                                    fflush(stdin);
+                                    more=getche();
+                                }
+                            break;//check
+                        case '4':
+                            clrscr();
+                            rewind(fs);
+                            while(fread(&s,recsize1,1,fs)==1)
+                                {
+                                    printf("\nUID of the Employee : ");
+                                    puts(s.uid);
+                                    printf("\nName of the Employee : ");
+                                    puts(s.name);
+                                    printf("\nName of the Guardian : ");
+                                    puts(s.fname);
+                                    printf("\nAge : %d",s.age);
+                                    printf("\nSalary: %lf",s.salary);
+                                    printf("\nGender : %c",s.gender);
+                                    printf("\nBlood group: %s",s.bg);
+                                    printf("\nAddress  : %d,%s,%s,%s",s.b.hno,s.b.street,s.b.city,s.b.state);
+                                    printf("\nphone number : +91-%s",s.ph);
+                                    printf("\nDesignation : %s",s.desig);
+                                    printf("\n----------------------------------------------------\n");
+                                }
+                            getch();
+                            break;
+                        case '5':
+                            clrscr();
+                            more='Y';
+                            while(more=='Y'||more=='y')
+                                {
+                                    printf("\nEnter the UID of the Employee to be deleted: ");
+                                    scanf("%s",id);
+                                    fx=fopen("tem.DAT","wb+");
+                                    rewind(fs);
+                                    while(fread(&s,recsize1,1,fs)==1)
+                                        {
+                                            if(strcmp(s.uid,id)!=0)
+                                            fwrite(&s,recsize1,1,fx);
+                                            else
+                                            printf("\nThe Record has been Deleted Successfully.");
+                                        }
+                                    fclose(fs);
+                                    fclose(fx);
+                                    remove("emp.DAT");
+                                    rename("tem.DAT","emp.DAT");
+                                    fs=fopen("emp.DAT","rb+");
+                                    printf("\nDelete another record?(Y/N): ");
+                                    fflush(stdin);
+                                    more=getche();
+                                }//check
+                            case '6':
+                                {
+                                    fclose(fs);
+                                    clrscr();
+                                    menu();
+                                }
+                            break;
+                        }
+                    }
+}//check
+void inv()
+{
+    FILE *fi,*fy;
+    char a,m;
+    char i_name[40];
+    int iF=0,j=1;
+    long int recsize2;
+    struct inventory v;
+    fi=fopen("inv.DAT","rb+");
+    if(fi==NULL)
+        {
+            fi=fopen("inv.DAT","wb+");
+            if(fi==NULL)
+                {
+                    puts("\nSorry!! Cannot open file");
+                    exit(1);
+                }
+        }
+    recsize2=sizeof(v);
+    while(1)
+        {
+            clrscr();
+            printf("\n\t\t\tINVENTORY");
+            printf("\n\t\t1.Add an Entry for Item");
+            printf("\n\t\t2.Modify Existing Entry");
+            printf("\n\t\t3.Search an Entry");
+            printf("\n\t\t4.Listing of all Entries");
+            printf("\n\t\t5.Delete an Entry");
+            printf("\n\t\t6.Main Menu");
+            printf("\n\n\t\tEnter your choice here: ");
+            fflush(stdin);
+            m=getche();
+            switch(m)
+                {
+                    case '1':
+                    clrscr();
+                    fseek(fi,0,SEEK_END);
+                    a='Y';
+                    while(a=='Y'||a=='y')
+                        {
+                            x:
+                            printf("\n\n\nEnter the Name of the Item: ");
+                            scanf("%s",i_name);
+                            rewind(fi);
+                            while(fread(&v,recsize2,1,fi)==1)
+                                {
+                                    if(strcmp(v.name,i_name)==0)
+                                        {
+                                            iF=1;
+                                            printf("\n\t\tTHIS ITEM ALREADY EXISTS. ENTER ANOTHER ONE");
+                                            goto x;
+                                        }
+                                }
+                            if(iF==0||fread(&v,recsize2,1,fi)==0)
+                                {
+                                    fseek (fi,0,SEEK_END);
+                                    strcpy(v.name,i_name);
+                                    fflush(stdin);
+                                    printf("\nEnter the Date of purchase: ");
+                                    scanf("%s",v.dop);
+                                    fflush(stdin);
+                                    printf("\nEnter the Quantity of the Item: ");
+                                    scanf("%d",&v.qnty);
+                                    printf("\nEnter the price of One Item: ");
+                                    scanf("%f",&v.price);
+                                    v.amount=v.qnty*v.price;
+                                    printf("\nThe amount of %d %s is = %f",v.qnty,v.name,v.amount);
+                                    fwrite(&v,recsize2,1,fi);
+                                    printf("\n----------------------------------------------------");
+                                    printf("\nWant to add entry of the another Item(Y/N): ");
+                                    fflush(stdin);
+                                    a=getche();
+                                }
+                            }
+                        break;
+                    case '2':
+                        clrscr();
+                        a='Y';
+                        while(a=='Y'||a=='y')
+                            {
+                                printf("\nEnter the name of the item to modify: ");
+                                scanf("%s",i_name);
+                                rewind(fi);
+                                while(fread(&v,recsize2,1,fi)==1)
+                                    {
+                                        if(strcmp(v.name,i_name)==0)
+                                            {
+                                                fflush(stdin);
+                                                printf("\nEnter the new name of the Item: ");
+                                                gets(v.name);
+                                                printf("\nEnter the new Date of purchase: ");
+                                                scanf("%s",v.dop);
+                                                printf("\nEnter the new Quantity of the Item: ");
+                                                scanf("%d",&v.qnty);
+                                                printf("\nEnter the new price of One Item: ");
+                                                scanf("%f",&v.price);
+                                                v.amount=v.qnty*v.price;
+                                                printf("\nThe new amount of %d %s is = %f",v.qnty,v.name,v.amount);                                                                                                                fseek(fi,-recsize2,SEEK_CUR);
+                                                fwrite(&v,recsize2,1,fi);
+                                                break;
+                                            }
+                                    }
+                                printf("\n----------------------------------------------------");
+                                printf("\nModify another Record(Y/N): ");
+                                fflush(stdin);
+                                a=getche();
+                            }
+                        break;
+                    case '3':
+                        clrscr();
+                        a='Y';
+                        while(a=='Y'||a=='y')
+                            {
+                                printf("\nEnter name of item to search: ");
+                                gets(i_name);
+                                rewind(fi);
+                                while(fread(&v,recsize2,1,fi)==1)
+                                    {
+                                        if(strcmp(v.name,i_name)==0)
+                                            {
+                                                printf("\nThe Name of the Item: ");
+                                                puts(v.name);
+                                                printf("\nEnter the Date of purchase: %s",v.dop);
+                                                printf("\nQuantity of the Item: %d",v.qnty);
+                                                printf("\nPrice of One Item: %f",v.price);
+                                                v.amount=v.qnty*v.price;
+                                                printf("\nThe amount of %d %s is = %f",v.qnty,v.name,v.amount);
+                                            }
+                                    }
+                                printf("\n----------------------------------------------------");
+                                printf("\nSearch another Entry(Y/N): ");
+                                fflush(stdin);
+                                a=getche();
+                            }
+                        break;//check
+                            case '4':
+                            clrscr();
+                            printf("S.No.\t ITEM\t DOP\t\t QUANTITY\t PRICE\t\t AMOUNT\n");
+                            printf("-----------------------------------------------------------------------------\n");
+                            rewind(fi);
+                            while(fread(&v,recsize2,1,fi)==1)
+                                {
+                                    printf("%d\t %s\t %s\t %d\t\t Rs.%f\t Rs.%f\n",j,v.name,v.dop,v.qnty,v.price,v.amount);
+                                    j++;
+                                }
+                            getch();
+                            break;
+                        case '5':
+                            clrscr();
+                            a='Y';
+                            while(a=='Y'||a=='y')
+                                {
+                                    printf("\nEnter the name of the Item to be deleted: ");
+                                    scanf("%s",i_name);
+                                    fy=fopen("temporary.DAT","wb+");
+                                    rewind(fi);
+                                    while(fread(&v,recsize2,1,fi)==1)
+                                        {
+                                            if(strcmp(v.name,i_name)!=0)
+                                            fwrite(&v,recsize2,1,fy);
+                                            else
+                                            printf("\nThe Record has been Deleted Successfully.");
+                                        }
+                                        fclose(fi);
+                                        fclose(fy);
+                                        remove("inv.DAT");
+                                        rename("temporary.DAT","inv.DAT");
+                                        fi=fopen("inv.DAT","rb+");
+                                        printf("\nDelete another record?(Y/N): ");
+                                        fflush(stdin);
+                                        a=getche();
+                                    }
+                            case '6':
+                                {
+                                    fclose(fi);
+                                    clrscr();
+                                    menu();
+                                }
+                            break;
+                        }
+                    }
+}
+
+
               
