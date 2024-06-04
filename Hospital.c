@@ -159,7 +159,8 @@ int main()
     scanf("%d", &enteredP);
 
     if(pass != enteredP){
-        return 0;
+         printf("Wrong Password! ");
+         return 0;
     }
 
     //code to clear the screen in c
